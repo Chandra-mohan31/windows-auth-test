@@ -1,0 +1,11 @@
+windows:
+  hosts:
+    ue1wtstwinrmd01.jcrew.com:
+  vars:
+    ansible_user: ansibleuser1
+    ansible_port: 5986
+    ansible_connection: winrm
+    ansible_winrm_transport: certificate
+    ansible_winrm_ca_trust_path: jc-serverCA-bundle.pem
+    ansible_winrm_cert_pem: ansibleuser1.pem
+    ansible_winrm_cert_key_pem: ansibleuser1.key
