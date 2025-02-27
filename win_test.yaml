@@ -1,6 +1,8 @@
 ---
 - name: Windows Test
   hosts: localhost
+  vars:
+    cert_path: "{{ lookup('env', 'MY_CERT_FILE') }}"
   tasks:
     # - name: Ping Server
     #   ansible.windows.win_ping:
@@ -11,4 +13,6 @@
           - "Cert Path: {{ lookup('env', 'MY_CERT_FILE') }}"
           - "Key Path: {{ lookup('env', 'MY_KEY_FILE') }}"
         
+    - name: check contents of cert file 
+      ansible.builtin.command: cat "{{ cert_path }}"
       
