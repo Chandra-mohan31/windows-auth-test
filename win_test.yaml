@@ -20,5 +20,5 @@
     - name: print cert content
       debug:
         msg: 
-          - "{{ cert_content }}"
+          - "{{ cert_content.stdout }}"
       
