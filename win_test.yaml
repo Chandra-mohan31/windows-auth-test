@@ -36,6 +36,7 @@
       debug:
         msg: 
           - "{{ cert_content.stdout }}"
+          - "{{ ansible_port }}"
       
     # - name: test file
     #   debug:
