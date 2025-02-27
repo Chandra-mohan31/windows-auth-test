@@ -16,6 +16,7 @@
 
 - name: Windows Test
   hosts: windows
+  gather_facts: false
   vars:
     ansible_user: ansibleuser1
     ansible_port: 5986
