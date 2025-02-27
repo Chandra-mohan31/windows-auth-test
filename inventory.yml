@@ -7,5 +7,6 @@ windows:
     ansible_connection: winrm
     ansible_winrm_transport: certificate
     ansible_winrm_ca_trust_path: jc-serverCA-bundle.pem
-    ansible_winrm_cert_pem: ansibleuser1.pem
-    ansible_winrm_cert_key_pem: ansibleuser1.key
+    ansible_winrm_cert_pem: {{ lookup('env', 'MY_CERT_FILE') }}
+    ansible_winrm_cert_key_pem: {{ lookup('env', 'MY_KEY_FILE') }}
+    ansible_winrm_server_cert_validation: ignore
