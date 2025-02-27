@@ -1,18 +1,10 @@
 ---
-- name: Windows Test
+- name: Configure keys and certs
   hosts: localhost
   gather_facts: false
   vars:
     cert_path: "{{ lookup('env', 'MY_CERT_FILE') }}"
     winrm_cert_pem: "/tmp/user-cert.pem"
-    ansible_user: ansibleuser1
-    ansible_port: 5986
-    ansible_connection: winrm
-    ansible_winrm_transport: certificate
-    ansible_winrm_ca_trust_path: jc-serverCA-bundle.pem
-    ansible_winrm_cert_pem: "/tmp/user-cert.pem"
-    ansible_winrm_cert_key_pem: "/tmp/user-key.key"
-    ansible_winrm_server_cert_validation: ignore
   pre_tasks:
     - name: Rename cert and key to proper .pem/.key format
       command: mv "{{ lookup('env', 'MY_CERT_FILE') }}" "/tmp/user-cert.pem"
@@ -22,6 +14,17 @@
       command: mv "{{ lookup('env', 'MY_KEY_FILE') }}" "/tmp/user-key.key"
       delegate_to: localhost
 
+- name: Windows Test
+  hosts: localhost
+  # vars:
+  #   ansible_user: ansibleuser1
+  #   ansible_port: 5986
+  #   ansible_connection: winrm
+  #   ansible_winrm_transport: certificate
+  #   ansible_winrm_ca_trust_path: jc-serverCA-bundle.pem
+  #   ansible_winrm_cert_pem: "/tmp/user-cert.pem"
+  #   ansible_winrm_cert_key_pem: "/tmp/user-key.key"
+  #   ansible_winrm_server_cert_validation: ignore
   tasks:
     # - name: Ping Server
     #   ansible.windows.win_ping:
@@ -36,8 +39,4 @@
         msg: 
           - "{{ cert_content.stdout }}"
           - "{{ ansible_port }}"
-
-
-
-
       
