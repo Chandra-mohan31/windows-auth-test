@@ -15,19 +15,17 @@
       delegate_to: localhost
 
 - name: Windows Test
-  hosts: localhost
-  # vars:
-  #   ansible_user: ansibleuser1
-  #   ansible_port: 5986
-  #   ansible_connection: winrm
-  #   ansible_winrm_transport: certificate
-  #   ansible_winrm_ca_trust_path: jc-serverCA-bundle.pem
-  #   ansible_winrm_cert_pem: "/tmp/user-cert.pem"
-  #   ansible_winrm_cert_key_pem: "/tmp/user-key.key"
-  #   ansible_winrm_server_cert_validation: ignore
+  hosts: windows
+  vars:
+    ansible_user: ansibleuser1
+    ansible_port: 5986
+    ansible_connection: winrm
+    ansible_winrm_transport: certificate
+    # ansible_winrm_ca_trust_path: jc-serverCA-bundle.pem
+    ansible_winrm_cert_pem: "/tmp/user-cert.pem"
+    ansible_winrm_cert_key_pem: "/tmp/user-key.key"
+    ansible_winrm_server_cert_validation: ignore
   tasks:
-    # - name: Ping Server
-    #   ansible.windows.win_ping:
     - name: check contents of cert file 
       ansible.builtin.command: cat /tmp/user-cert.pem
       delegate_to: localhost
@@ -38,4 +36,6 @@
       debug:
         msg: 
           - "{{ cert_content.stdout }}"
+    - name: Ping Server
+      ansible.windows.win_ping:
       
