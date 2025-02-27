@@ -1,6 +1,7 @@
 ---
 - name: Windows Test
   hosts: localhost
+  gather_facts: false
   vars:
     cert_path: "{{ lookup('env', 'MY_CERT_FILE') }}"
     ansible_user: ansibleuser1
