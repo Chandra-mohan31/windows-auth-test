@@ -7,8 +7,8 @@
     - name: test file
       # ansible.builtin.command: cat "{{ lookup('env', 'MY_CERT_FILE') }}"
       debug:
-      msg:
-        - "Cert Path: {{ lookup('env', 'MY_CERT_FILE') }}"
-        - "Key Path: {{ lookup('env', 'MY_KEY_FILE') }}"
+        msg:
+          - "Cert Path: {{ lookup('env', 'MY_CERT_FILE') }}"
+          - "Key Path: {{ lookup('env', 'MY_KEY_FILE') }}"
         
       
