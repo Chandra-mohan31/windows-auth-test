@@ -15,4 +15,10 @@
         
     - name: check contents of cert file 
       ansible.builtin.command: cat "{{ cert_path }}"
+      register: cert_content
+
+    - name: print cert content
+      debug:
+        msg: 
+          - "{{ cert_content }}"
       
