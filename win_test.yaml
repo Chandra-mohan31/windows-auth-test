@@ -1,10 +1,14 @@
 ---
 - name: Windows Test
-  hosts: localhost
+  hosts: windows
   tasks:
     # - name: Ping Server
     #   ansible.windows.win_ping:
     - name: test file
-      ansible.builtin.command: cat "{{ lookup('env', 'MY_CERT_FILE') }}"
+      # ansible.builtin.command: cat "{{ lookup('env', 'MY_CERT_FILE') }}"
+      debug:
+      msg:
+        - "Cert Path: {{ lookup('env', 'MY_CERT_FILE') }}"
+        - "Key Path: {{ lookup('env', 'MY_KEY_FILE') }}"
         
       
