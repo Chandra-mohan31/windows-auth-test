@@ -37,7 +37,5 @@
       register: cert_content
 
     - name: print cert content
-      debug:
-        msg: 
-          - "{{ cert_content.stdout }}"
+      debug: "{{ cert_content.stdout }}"
       
