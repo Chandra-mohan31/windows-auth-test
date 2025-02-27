@@ -27,16 +27,16 @@
     ansible_winrm_cert_key_pem: "{{ lookup('env', 'MY_KEY_FILE') }}"
     ansible_winrm_server_cert_validation: ignore
   tasks:
-    - name: check contents of cert file 
-      ansible.builtin.command: cat "{{ lookup('env', 'MY_CERT_FILE') }}"
-      delegate_to: localhost
-      register: cert_content
+    # - name: check contents of cert file 
+    #   ansible.builtin.command: cat "{{ lookup('env', 'MY_CERT_FILE') }}"
+    #   delegate_to: localhost
+    #   register: cert_content
 
-    - name: print cert content
-      delegate_to: localhost
-      debug:
-        msg: 
-          - "{{ cert_content.stdout }}"
+    # - name: print cert content
+    #   delegate_to: localhost
+    #   debug:
+    #     msg: 
+    #       - "{{ cert_content.stdout }}"
     - name: Ping Server
       ansible.windows.win_ping:
       
