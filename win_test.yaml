@@ -4,18 +4,6 @@
   gather_facts: false
   vars:
     cert_path: "{{ lookup('env', 'MY_CERT_FILE') }}"
-  pre_tasks:
-    - name: Rename cert and key to proper .pem/.key format
-      command: mv "{{ lookup('env', 'MY_CERT_FILE') }}" "/tmp/user-cert.pem"
-      delegate_to: localhost
-
-    - name: Rename key file
-      command: mv "{{ lookup('env', 'MY_KEY_FILE') }}" "/tmp/user-key.key"
-      delegate_to: localhost
----
-- name: Windows Test
-  hosts: windows
-  vars:
     winrm_cert_pem: "/tmp/user-cert.pem"
     ansible_user: ansibleuser1
     ansible_port: 5986
@@ -25,21 +13,31 @@
     ansible_winrm_cert_pem: "/tmp/user-cert.pem"
     ansible_winrm_cert_key_pem: "/tmp/user-key.key"
     ansible_winrm_server_cert_validation: ignore
+  pre_tasks:
+    - name: Rename cert and key to proper .pem/.key format
+      command: mv "{{ lookup('env', 'MY_CERT_FILE') }}" "/tmp/user-cert.pem"
+      delegate_to: localhost
+
+    - name: Rename key file
+      command: mv "{{ lookup('env', 'MY_KEY_FILE') }}" "/tmp/user-key.key"
+      delegate_to: localhost
+
   tasks:
     # - name: Ping Server
     #   ansible.windows.win_ping:
     - name: check contents of cert file 
       ansible.builtin.command: cat /tmp/user-cert.pem
+      delegate_to: localhost
       register: cert_content
 
     - name: print cert content
+      delegate_to: localhost
       debug:
         msg: 
           - "{{ cert_content.stdout }}"
           - "{{ ansible_port }}"
+
+
+
+
       
-    # - name: test file
-    #   debug:
-    #     msg:
-    #       - "Cert Path: {{ lookup('env', 'MY_CERT_FILE') }}"
-    #       - "Key Path: {{ lookup('env', 'MY_KEY_FILE') }}"
