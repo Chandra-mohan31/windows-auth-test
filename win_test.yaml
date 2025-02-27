@@ -38,5 +38,4 @@
       debug:
         msg: 
           - "{{ cert_content.stdout }}"
-          - "{{ ansible_port }}"
       
